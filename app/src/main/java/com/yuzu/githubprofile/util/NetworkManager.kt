@@ -1,4 +1,4 @@
-package com.yuzu.githubprofile.model.util
+package com.yuzu.githubprofile.util
 
 import android.content.Context
 import android.net.ConnectivityManager

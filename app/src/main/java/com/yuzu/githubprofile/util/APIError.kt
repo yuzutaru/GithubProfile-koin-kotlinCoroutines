@@ -1,4 +1,4 @@
-package com.yuzu.githubprofile.model.util
+package com.yuzu.githubprofile.util
 
 data class APIError(val message: String) {
     constructor() : this("")

@@ -1,4 +1,4 @@
-package com.yuzu.githubprofile.model.util
+package com.yuzu.githubprofile.util
 
 /**
  * AppResult class is a wrapper class that helps to handle success and failure scenarios with co routines
