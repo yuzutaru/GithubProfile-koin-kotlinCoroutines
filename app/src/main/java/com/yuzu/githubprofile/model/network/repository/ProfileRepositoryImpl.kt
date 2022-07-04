@@ -3,6 +3,7 @@ package com.yuzu.githubprofile.model.network.repository
 import android.content.Context
 import android.os.Build
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.yuzu.githubprofile.model.data.UserData
 import com.yuzu.githubprofile.model.network.api.ProfileApi
 import com.yuzu.githubprofile.model.network.db.UserDAO
@@ -49,7 +50,7 @@ class ProfileRepositoryImpl(
             }
         } else {
             //check in db if the data exists
-            val data = userListDB(since)
+            val data = userListDB(since).value!!
             return if (data.isNotEmpty()) {
                 Log.d(TAG, "from db")
                 AppResult.Success(data)
@@ -59,7 +60,7 @@ class ProfileRepositoryImpl(
         }
     }
 
-    private suspend fun userListDB(since: Int): List<UserData> {
+    private suspend fun userListDB(since: Int): LiveData<List<UserData>> {
         return withContext(Dispatchers.IO) {
             dao.getUserBySinceId(since)
         }

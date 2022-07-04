@@ -12,13 +12,14 @@ class GithubProfileApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@GithubProfileApplication)
-            val modules = modules(
+            val modules = listOf(
                 apiModule,
                 viewModelModule,
                 repositoryModule,
                 networkModule,
                 databaseModule
             )
+            modules(modules)
         }
     }
 }

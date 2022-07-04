@@ -6,9 +6,9 @@ import retrofit2.Retrofit
 
 val apiModule = module {
 
-    fun provideCountriesApi(retrofit: Retrofit): ProfileApi {
+    fun provideProfileApi(retrofit: Retrofit): ProfileApi {
         return retrofit.create(ProfileApi::class.java)
     }
 
-    single { provideCountriesApi(get()) }
+    single { provideProfileApi(get()) }
 }

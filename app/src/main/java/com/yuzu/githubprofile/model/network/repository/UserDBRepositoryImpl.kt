@@ -1,8 +1,8 @@
 package com.yuzu.githubprofile.model.network.repository
 
+import androidx.lifecycle.LiveData
 import com.yuzu.githubprofile.model.data.UserData
 import com.yuzu.githubprofile.model.network.db.UserDAO
-import io.reactivex.Single
 import java.util.concurrent.Executor
 
 /**
@@ -10,10 +10,10 @@ import java.util.concurrent.Executor
  */
 
 class UserDBRepositoryImpl(private val dao: UserDAO, private val exec: Executor): UserDBRepository {
-    override fun getUserBySinceId(since: Int): Single<List<UserData>> {
+    override fun getUserBySinceId(since: Int): LiveData<List<UserData>> {
         return dao.getUserBySinceId(since)
     }
-    override fun getUsersBySearch(search: String): Single<List<UserData>> {
+    override fun getUsersBySearch(search: String): LiveData<List<UserData>> {
         return dao.getUsersBySearch(search)
     }
 

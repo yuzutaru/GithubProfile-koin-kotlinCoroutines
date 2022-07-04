@@ -10,7 +10,7 @@ import org.koin.dsl.module
 val databaseModule = module {
 
     fun provideDatabase(application: Application): UserDB {
-       return Room.databaseBuilder(application, UserDB::class.java, "countries")
+       return Room.databaseBuilder(application, UserDB::class.java, "user-db")
             .fallbackToDestructiveMigration()
             .build()
     }
@@ -20,7 +20,7 @@ val databaseModule = module {
     }
 
     single { provideDatabase(androidApplication()) }
-    single { provideUserDao(get()) }
-
-
+    single {
+        provideUserDao(get())
+    }
 }
