@@ -11,7 +11,7 @@ import com.yuzu.githubprofile.model.network.db.UserDAO
 import com.yuzu.githubprofile.model.network.db.UserDB
 import com.yuzu.githubprofile.utils.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.*
 import org.junit.runner.RunWith
 
@@ -52,10 +52,18 @@ class UserDAOTest {
     test case to insert user in room database
     */
     @Test
-    fun insertUser() = runBlockingTest {
+    fun insertUser() = runTest {
         val data = UserData(0, 0)
         dao.insert(data)
         val users = dao.getUserBySinceId(0).getOrAwaitValue()
         Assert.assertEquals(users.size, 1)
+    }
+
+    @Test
+    fun insertListUser() = runTest {
+        val list = listOf(UserData(0, 0), UserData(1, 0))
+        dao.insert(list)
+        val userList = dao.getUserBySinceId(0).getOrAwaitValue()
+        Assert.assertEquals(userList.size, 2)
     }
 }
