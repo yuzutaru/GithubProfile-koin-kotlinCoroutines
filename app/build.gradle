@@ -56,10 +56,12 @@ dependencies {
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
     androidTestImplementation "com.google.truth:truth:1.1.3"
 
+    //Mockk
+    testImplementation "io.mockk:mockk:1.12.4"
+
     // lifecycle
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.0'
-    implementation "androidx.fragment:fragment-ktx:2.5.0"
     kapt "androidx.lifecycle:lifecycle-common-java8:2.5.0"
 
     // Koin

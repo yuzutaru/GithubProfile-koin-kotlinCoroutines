@@ -1,15 +1,10 @@
 package com.yuzu.githubprofile.repository.remote.contract
 
-import android.content.Context
-import androidx.lifecycle.LiveData
 import com.yuzu.githubprofile.repository.data.ProfileData
 import com.yuzu.githubprofile.repository.data.Resource
 import com.yuzu.githubprofile.repository.data.ResponseHandler
 import com.yuzu.githubprofile.repository.data.UserData
 import com.yuzu.githubprofile.repository.remote.api.ProfileApi
-import com.yuzu.githubprofile.repository.local.db.UserDAO
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 /**
  * Created by Yustar Pramudana on 18/02/2021
