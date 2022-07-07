@@ -1,4 +1,4 @@
-package com.yuzu.githubprofile.repository.contract
+package com.yuzu.githubprofile.repository.remote.contract
 
 import com.yuzu.githubprofile.repository.data.UserData
 import com.yuzu.githubprofile.util.AppResult

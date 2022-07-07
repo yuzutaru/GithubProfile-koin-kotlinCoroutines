@@ -1,4 +1,4 @@
-package com.yuzu.githubprofile.repository.contract
+package com.yuzu.githubprofile.repository.remote.contract
 
 import android.content.Context
 import android.os.Build

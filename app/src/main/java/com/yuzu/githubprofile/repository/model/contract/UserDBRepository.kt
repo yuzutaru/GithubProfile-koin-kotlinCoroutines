@@ -1,4 +1,4 @@
-package com.yuzu.githubprofile.repository.contract
+package com.yuzu.githubprofile.repository.model.contract
 
 import androidx.lifecycle.LiveData
 import com.yuzu.githubprofile.repository.data.UserData
