@@ -1,4 +1,4 @@
-package com.yuzu.githubprofile.repository.model.contract
+package com.yuzu.githubprofile.repository.local.contract
 
 import com.yuzu.githubprofile.repository.data.ProfileData
 import io.reactivex.Single

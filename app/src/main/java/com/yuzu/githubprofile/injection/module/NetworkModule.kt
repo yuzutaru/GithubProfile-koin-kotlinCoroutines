@@ -29,7 +29,7 @@ val networkModule = module {
         return Cache(application.cacheDir, cacheSize.toLong())
     }
 
-    fun provideHttpClient(cache: Cache): OkHttpClient {
+    fun provideHttpClient(): OkHttpClient {
         try {
             // Create a trust manager that does not validate certificate chains
 
@@ -82,7 +82,6 @@ val networkModule = module {
         return GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.IDENTITY).create()
     }
 
-
     fun provideRetrofit(factory: Gson, client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -92,7 +91,7 @@ val networkModule = module {
     }
 
     single { provideCache(androidApplication()) }
-    single { provideHttpClient(get()) }
+    single { provideHttpClient() }
     single { provideGson() }
     single { provideRetrofit(get(), get()) }
     factory { ResponseHandler() }

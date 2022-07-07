@@ -1,4 +1,4 @@
-package com.yuzu.githubprofile.repository.model.network.local
+package com.yuzu.githubprofile.repository.local.network.local
 
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
@@ -7,8 +7,8 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.yuzu.githubprofile.repository.data.UserData
-import com.yuzu.githubprofile.repository.model.db.UserDAO
-import com.yuzu.githubprofile.repository.model.db.UserDB
+import com.yuzu.githubprofile.repository.local.db.UserDAO
+import com.yuzu.githubprofile.repository.local.db.UserDB
 import com.yuzu.githubprofile.utils.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest

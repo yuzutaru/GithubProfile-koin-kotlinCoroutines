@@ -2,8 +2,8 @@ package com.yuzu.githubprofile.injection.module
 
 import android.app.Application
 import androidx.room.Room
-import com.yuzu.githubprofile.repository.model.db.UserDAO
-import com.yuzu.githubprofile.repository.model.db.UserDB
+import com.yuzu.githubprofile.repository.local.db.UserDAO
+import com.yuzu.githubprofile.repository.local.db.UserDB
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 

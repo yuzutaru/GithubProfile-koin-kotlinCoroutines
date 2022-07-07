@@ -1,4 +1,4 @@
-package com.yuzu.githubprofile.repository.model.local
+package com.yuzu.githubprofile.repository.local.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

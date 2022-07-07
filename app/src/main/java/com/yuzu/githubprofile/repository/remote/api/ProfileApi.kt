@@ -15,11 +15,11 @@ interface ProfileApi {
      * User List
      * */
     @GET(value = "users")
-    fun userList(@Query("since") since: Int): Response<List<UserData>>
+    fun userList(@Query("since") since: Int): List<UserData>
 
     /**
      * User Detail
      * */
     @GET(value = "users/{username}")
-    fun userDetail(@Path(value = "username") username: String): Response<ProfileData>
+    fun userDetail(@Path(value = "username") username: String): ProfileData
 }

@@ -1,18 +1,13 @@
 package com.yuzu.githubprofile.repository.remote.contract
 
 import android.content.Context
-import android.os.Build
-import android.util.Log
 import androidx.lifecycle.LiveData
+import com.yuzu.githubprofile.repository.data.ProfileData
+import com.yuzu.githubprofile.repository.data.Resource
+import com.yuzu.githubprofile.repository.data.ResponseHandler
 import com.yuzu.githubprofile.repository.data.UserData
 import com.yuzu.githubprofile.repository.remote.api.ProfileApi
-import com.yuzu.githubprofile.repository.model.db.UserDAO
-import com.yuzu.githubprofile.util.AppResult
-import com.yuzu.githubprofile.util.NetworkManager.isOnline
-import com.yuzu.githubprofile.util.TAG
-import com.yuzu.githubprofile.util.Utils.handleApiError
-import com.yuzu.githubprofile.util.Utils.handleSuccess
-import com.yuzu.githubprofile.util.noNetworkConnectivityError
+import com.yuzu.githubprofile.repository.local.db.UserDAO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -20,49 +15,20 @@ import kotlinx.coroutines.withContext
  * Created by Yustar Pramudana on 18/02/2021
  */
 
-class ProfileRepositoryImpl(
-    private val api: ProfileApi,
-    private val context: Context,
-    private val dao: UserDAO
-) :
-    ProfileRepository {
-
-    override suspend fun userList(since: Int): AppResult<List<UserData>> {
-        if (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                isOnline(context)
-            } else {
-                TODO("VERSION.SDK_INT < M")
-            }
-        ) {
-            return try {
-                val response = api.userList(since)
-                if (response.isSuccessful) {
-                    //save the data
-                    response.body()?.let {
-                        withContext(Dispatchers.IO) { dao.insert(it) }
-                    }
-                    handleSuccess(response)
-                } else {
-                    handleApiError(response)
-                }
-            } catch (e: Exception) {
-                AppResult.Error(e)
-            }
-        } else {
-            //check in db if the data exists
-            val data = userListDB(since).value!!
-            return if (data.isNotEmpty()) {
-                Log.d(TAG, "from db")
-                AppResult.Success(data)
-            } else
-            //no network
-                context.noNetworkConnectivityError()
+class ProfileRepositoryImpl(private val api: ProfileApi, private val responseHandler: ResponseHandler): ProfileRepository {
+    override fun userList(since: Int): Resource<List<UserData>> {
+        return try {
+            return responseHandler.handleSuccess(api.userList(since))
+        } catch (e: Exception) {
+            responseHandler.handleException(e)
         }
     }
 
-    private suspend fun userListDB(since: Int): LiveData<List<UserData>> {
-        return withContext(Dispatchers.IO) {
-            dao.getUserBySinceId(since)
+    override fun userDetail(username: String): Resource<ProfileData> {
+        return try {
+            return responseHandler.handleSuccess(api.userDetail(username))
+        } catch (e: Exception) {
+            responseHandler.handleException(e)
         }
     }
 }

@@ -1,7 +1,7 @@
-package com.yuzu.githubprofile.repository.model.contract
+package com.yuzu.githubprofile.repository.local.contract
 
 import com.yuzu.githubprofile.repository.data.NotesData
-import com.yuzu.githubprofile.repository.model.local.NotesDAO
+import com.yuzu.githubprofile.repository.local.local.NotesDAO
 import io.reactivex.Single
 import java.util.concurrent.Executor
 
