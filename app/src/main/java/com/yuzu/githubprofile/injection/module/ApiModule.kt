@@ -1,6 +1,6 @@
 package com.yuzu.githubprofile.injection.module
 
-import com.yuzu.githubprofile.model.network.api.ProfileApi
+import com.yuzu.githubprofile.repository.remote.api.ProfileApi
 import org.koin.dsl.module
 import retrofit2.Retrofit
 

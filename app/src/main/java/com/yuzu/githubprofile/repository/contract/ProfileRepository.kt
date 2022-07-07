@@ -1,6 +1,6 @@
-package com.yuzu.githubprofile.model.network.repository
+package com.yuzu.githubprofile.repository.contract
 
-import com.yuzu.githubprofile.model.data.UserData
+import com.yuzu.githubprofile.repository.data.UserData
 import com.yuzu.githubprofile.util.AppResult
 
 /**

@@ -1,8 +1,8 @@
-package com.yuzu.githubprofile.model.network.db
+package com.yuzu.githubprofile.repository.model.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.yuzu.githubprofile.model.data.UserData
+import com.yuzu.githubprofile.repository.data.UserData
 
 /**
  * Created by Yustar Pramudana on 19/02/2021

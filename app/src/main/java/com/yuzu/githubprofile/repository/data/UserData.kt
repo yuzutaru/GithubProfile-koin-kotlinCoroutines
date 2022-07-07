@@ -1,4 +1,4 @@
-package com.yuzu.githubprofile.model.data
+package com.yuzu.githubprofile.repository.data
 
 import android.os.Parcelable
 import androidx.room.Entity

@@ -1,7 +1,7 @@
-package com.yuzu.githubprofile.model.network.api
+package com.yuzu.githubprofile.repository.remote.api
 
-import com.yuzu.githubprofile.model.data.ProfileData
-import com.yuzu.githubprofile.model.data.UserData
+import com.yuzu.githubprofile.repository.data.ProfileData
+import com.yuzu.githubprofile.repository.data.UserData
 import retrofit2.Response
 import retrofit2.http.*
 

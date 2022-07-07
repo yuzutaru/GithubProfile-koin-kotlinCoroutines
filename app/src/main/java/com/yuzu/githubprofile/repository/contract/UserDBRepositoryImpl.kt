@@ -1,8 +1,8 @@
-package com.yuzu.githubprofile.model.network.repository
+package com.yuzu.githubprofile.repository.contract
 
 import androidx.lifecycle.LiveData
-import com.yuzu.githubprofile.model.data.UserData
-import com.yuzu.githubprofile.model.network.db.UserDAO
+import com.yuzu.githubprofile.repository.data.UserData
+import com.yuzu.githubprofile.repository.model.db.UserDAO
 import java.util.concurrent.Executor
 
 /**

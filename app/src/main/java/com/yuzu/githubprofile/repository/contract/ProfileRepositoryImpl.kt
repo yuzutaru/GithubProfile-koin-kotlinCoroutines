@@ -1,12 +1,12 @@
-package com.yuzu.githubprofile.model.network.repository
+package com.yuzu.githubprofile.repository.contract
 
 import android.content.Context
 import android.os.Build
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.yuzu.githubprofile.model.data.UserData
-import com.yuzu.githubprofile.model.network.api.ProfileApi
-import com.yuzu.githubprofile.model.network.db.UserDAO
+import com.yuzu.githubprofile.repository.data.UserData
+import com.yuzu.githubprofile.repository.remote.api.ProfileApi
+import com.yuzu.githubprofile.repository.model.db.UserDAO
 import com.yuzu.githubprofile.util.AppResult
 import com.yuzu.githubprofile.util.NetworkManager.isOnline
 import com.yuzu.githubprofile.util.TAG
