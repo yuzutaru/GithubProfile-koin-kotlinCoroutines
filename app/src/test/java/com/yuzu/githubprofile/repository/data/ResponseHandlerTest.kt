@@ -11,10 +11,6 @@ import retrofit2.HttpException
 import retrofit2.Response
 import java.net.SocketTimeoutException
 
-/**
- * Created by Yustar Pramudana on 07/07/22.
- */
-
 @RunWith(JUnit4::class)
 class ResponseHandlerTest {
     lateinit var responseHandler: ResponseHandler
