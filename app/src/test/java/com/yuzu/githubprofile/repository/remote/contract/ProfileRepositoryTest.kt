@@ -23,10 +23,13 @@ import retrofit2.HttpException
 @RunWith(JUnit4::class)
 class ProfileRepositoryTest {
     private val responseHandler = ResponseHandler()
+
     private lateinit var api: ProfileApi
     private lateinit var repository: ProfileRepository
+
     private val profileData = ProfileData(0, "yuzu")
     private val userList = listOf(UserData(0,0))
+
     private val response = Resource.success(profileData)
     private val responseList = Resource.success(userList)
     private val errorResponse = Resource.error("Something went wrong", null)
@@ -37,15 +40,13 @@ class ProfileRepositoryTest {
         api = mockk()
         val mockException: HttpException = mockk()
         every { mockException.code() } returns 401
+
         runBlocking {
-            every { api.userDetail("yuzu") } throws mockException
             every { api.userDetail("yuzu") } returns profileData
             every { api.userList(0) } returns userList
         }
-        repository = ProfileRepositoryImpl(
-            api,
-            responseHandler
-        )
+
+        repository = ProfileRepositoryImpl(api, responseHandler)
     }
 
     @Test

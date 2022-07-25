@@ -1,6 +1,9 @@
 package com.yuzu.githubprofile.injection.module
 
 import com.yuzu.githubprofile.repository.data.ResponseHandler
+import com.yuzu.githubprofile.repository.model.contract.ProfileDBRepository
+import com.yuzu.githubprofile.repository.model.contract.ProfileDBRepositoryImpl
+import com.yuzu.githubprofile.repository.model.local.ProfileDAO
 import com.yuzu.githubprofile.repository.remote.api.ProfileApi
 import com.yuzu.githubprofile.repository.remote.contract.ProfileRepository
 import com.yuzu.githubprofile.repository.remote.contract.ProfileRepositoryImpl
@@ -13,5 +16,10 @@ val repositoryModule = module {
         return ProfileRepositoryImpl(api, responseHandler)
     }
 
-    single { provideProfileRepository(get<Retrofit>().create(ProfileApi::class.java), get()) }
+    fun provideProfileDBRepository(dao: ProfileDAO): ProfileDBRepository {
+        return ProfileDBRepositoryImpl(dao)
+    }
+
+    single { provideProfileRepository(get(), get()) }
+    single { provideProfileDBRepository(get()) }
 }
