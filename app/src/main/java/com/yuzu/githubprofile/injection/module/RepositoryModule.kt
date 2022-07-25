@@ -16,10 +16,10 @@ val repositoryModule = module {
         return ProfileRepositoryImpl(api, responseHandler)
     }
 
-    fun provideProfileDBRepository(dao: ProfileDAO): ProfileDBRepository {
-        return ProfileDBRepositoryImpl(dao)
+    fun provideProfileDBRepository(dao: ProfileDAO, responseHandler: ResponseHandler): ProfileDBRepository {
+        return ProfileDBRepositoryImpl(dao, responseHandler)
     }
 
     single { provideProfileRepository(get(), get()) }
-    single { provideProfileDBRepository(get()) }
+    single { provideProfileDBRepository(get(), get()) }
 }
