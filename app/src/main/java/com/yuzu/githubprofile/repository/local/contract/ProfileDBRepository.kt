@@ -1,4 +1,4 @@
-package com.yuzu.githubprofile.repository.model.contract
+package com.yuzu.githubprofile.repository.local.contract
 
 import com.yuzu.githubprofile.repository.data.ProfileData
 
@@ -7,8 +7,8 @@ import com.yuzu.githubprofile.repository.data.ProfileData
  */
 
 interface ProfileDBRepository {
-    fun getAllProfiles(): Result<List<ProfileData>>
-    fun getProfile(login: String): Result<ProfileData>
+    fun getAllProfiles(): List<ProfileData>
+    fun getProfile(login: String): ProfileData
     fun insert(profileData: ProfileData)
     fun insert(profileDataList: List<ProfileData>)
 }

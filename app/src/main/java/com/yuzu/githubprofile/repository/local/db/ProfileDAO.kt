@@ -1,4 +1,4 @@
-package com.yuzu.githubprofile.repository.model.local
+package com.yuzu.githubprofile.repository.local.db
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -13,10 +13,10 @@ import com.yuzu.githubprofile.repository.data.ProfileData
 @Dao
 interface ProfileDAO {
     @Query("SELECT * from ProfileData")
-    fun getAllProfiles(): Result<List<ProfileData>>
+    fun getAllProfiles(): List<ProfileData>
 
     @Query("SELECT * FROM ProfileData WHERE login = :login")
-    fun getProfile(login: String): Result<ProfileData>
+    fun getProfile(login: String): ProfileData
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(profileData: ProfileData)

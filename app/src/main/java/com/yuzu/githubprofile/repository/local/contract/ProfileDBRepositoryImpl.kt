@@ -1,17 +1,18 @@
-package com.yuzu.githubprofile.repository.model.contract
+package com.yuzu.githubprofile.repository.local.contract
 
 import com.yuzu.githubprofile.repository.data.ProfileData
-import com.yuzu.githubprofile.repository.model.local.ProfileDAO
+import com.yuzu.githubprofile.repository.local.db.ProfileDAO
+
 /**
  * Created by Yustar Pramudana on 21/02/2021
  */
 
 class ProfileDBRepositoryImpl(private val dao: ProfileDAO): ProfileDBRepository {
-    override fun getAllProfiles(): Result<List<ProfileData>> {
+    override fun getAllProfiles(): List<ProfileData> {
         return dao.getAllProfiles()
     }
 
-    override fun getProfile(login: String): Result<ProfileData> {
+    override fun getProfile(login: String): ProfileData {
         return dao.getProfile(login)
     }
 

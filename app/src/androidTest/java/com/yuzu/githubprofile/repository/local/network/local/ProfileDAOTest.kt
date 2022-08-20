@@ -7,8 +7,8 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.yuzu.githubprofile.repository.data.ProfileData
-import com.yuzu.githubprofile.repository.model.local.ProfileDAO
-import com.yuzu.githubprofile.repository.model.local.ProfileDB
+import com.yuzu.githubprofile.repository.local.db.ProfileDAO
+import com.yuzu.githubprofile.repository.local.db.ProfileDB
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.*
 import org.junit.runner.RunWith
