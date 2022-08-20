@@ -1,17 +1,14 @@
 package com.yuzu.githubprofile.injection.module
 
 import android.annotation.SuppressLint
-import android.app.Application
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.yuzu.githubprofile.repository.data.ResponseHandler
+import com.yuzu.githubprofile.repository.exception.ResultCallAdapterFactory
 import com.yuzu.githubprofile.util.BASE_URL
 import com.yuzu.githubprofile.util.TIMEOUT_HTTP
-import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,10 +21,6 @@ import javax.net.ssl.TrustManager
 import javax.net.ssl.X509TrustManager
 
 val networkModule = module {
-    fun provideCache(application: Application): Cache {
-        val cacheSize = 10 * 1024 * 1024
-        return Cache(application.cacheDir, cacheSize.toLong())
-    }
 
     fun provideHttpClient(): OkHttpClient {
         try {
@@ -86,13 +79,12 @@ val networkModule = module {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(factory))
+            .addCallAdapterFactory(ResultCallAdapterFactory())
             .client(client)
             .build()
     }
 
-    single { provideCache(androidApplication()) }
     single { provideHttpClient() }
     single { provideGson() }
     single { provideRetrofit(get(), get()) }
-    factory { ResponseHandler() }
 }
