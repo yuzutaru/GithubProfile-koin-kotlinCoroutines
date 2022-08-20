@@ -27,9 +27,13 @@ class ProfileRepositoryTest {
     private val profileData = ProfileData(0, "yuzu")
     private val userList = listOf(UserData(0,0))
 
-    private val response = Result.success(profileData)
-    private val responseList = Result.success(userList)
-    private val errorResponse = Result.success(Result.failure<RuntimeException>(RuntimeException("Something went wrong", null)))
+    private val profileDataResponse = Result.success(profileData)
+    private val userListResponse = Result.success(userList)
+
+    private val runtimeException = RuntimeException("Something went wrong", null)
+
+    private val errorProfile = Result.failure<ProfileData>(runtimeException)
+    private val errorUser = Result.failure<List<UserData>>(runtimeException)
 
 
     @Before
@@ -39,8 +43,11 @@ class ProfileRepositoryTest {
         every { mockException.code() } returns 401
 
         runBlocking {
-            every { api.userDetail("yuzu") } returns response
-            every { api.userList(0) } returns responseList
+            every { api.userDetail("yuzu") } returns profileDataResponse
+            every { api.userDetail("Naruto") } returns errorProfile
+
+            every { api.userList(0) } returns userListResponse
+            every { api.userList(1) } returns errorUser
         }
 
         repository = ProfileRepositoryImpl(api)
@@ -49,24 +56,24 @@ class ProfileRepositoryTest {
     @Test
     fun `test userDetail when valid username is requested, then ProfileData is returned`() =
         runBlocking {
-            assertEquals(response, repository.userDetail("yuzu"))
+            assertEquals(profileDataResponse, repository.userDetail("yuzu"))
         }
 
     @Test
     fun `test userDetail when invalid username is requested, then error is returned`() =
         runBlocking {
-            assertEquals(errorResponse, repository.userDetail("Naruto"))
+            assertEquals(errorProfile, repository.userDetail("Naruto"))
         }
 
     @Test
     fun `test userList when valid since is requested, then userList is returned`() =
         runBlocking {
-            assertEquals(responseList, repository.userList(0))
+            assertEquals(userListResponse, repository.userList(0))
         }
 
     @Test
     fun `test userList when invalid since is requested, then error is returned`() =
         runBlocking {
-            assertEquals(errorResponse, repository.userList(1))
+            assertEquals(errorProfile, repository.userList(1))
         }
 }
