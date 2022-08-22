@@ -4,7 +4,7 @@ package com.yuzu.githubprofile.repository.data
  * Created by Yustar Pramudana on 22/08/22.
  */
 
-class Response<S, E: ErrorResponse.ErrorEntryWithMessage> {
+open class Response<S, E: ErrorResponse.ErrorEntryWithMessage> {
     var success: Boolean = true
     var successData: S? = null
     var errorData: ErrorResponse<E>? = null
