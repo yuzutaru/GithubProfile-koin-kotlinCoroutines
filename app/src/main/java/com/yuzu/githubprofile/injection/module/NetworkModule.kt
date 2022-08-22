@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.yuzu.githubprofile.repository.exception.ResultCallAdapterFactory
+import com.yuzu.githubprofile.repository.remote.ResultCallAdapterFactory
 import com.yuzu.githubprofile.util.BASE_URL
 import com.yuzu.githubprofile.util.TIMEOUT_HTTP
 import okhttp3.OkHttpClient
