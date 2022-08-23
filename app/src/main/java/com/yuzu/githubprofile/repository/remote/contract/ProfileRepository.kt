@@ -2,13 +2,13 @@ package com.yuzu.githubprofile.repository.remote.contract
 
 import com.yuzu.githubprofile.repository.data.ProfileData
 import com.yuzu.githubprofile.repository.data.UserData
-import com.yuzu.githubprofile.repository.remote.api.ProfileResponse
+import com.yuzu.githubprofile.repository.model.Response
 
 /**
- * Created by Yustar Pramudana on 18/02/2021
+ * Created by Yustar Pramudana on 23/08/2022
  */
 
 interface ProfileRepository {
-    suspend fun userList(since: Int): ProfileResponse<List<UserData>>
-    suspend fun userDetail(username: String): ProfileResponse<ProfileData>
+    suspend fun userList(since: Int): Response<List<UserData>>
+    suspend fun userDetail(username: String): Response<ProfileData>
 }

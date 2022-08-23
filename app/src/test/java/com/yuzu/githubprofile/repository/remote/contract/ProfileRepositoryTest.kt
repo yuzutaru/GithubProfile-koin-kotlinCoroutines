@@ -2,7 +2,10 @@ package com.yuzu.githubprofile.repository.remote.contract
 
 import com.yuzu.githubprofile.repository.data.ProfileData
 import com.yuzu.githubprofile.repository.data.UserData
+import com.yuzu.githubprofile.repository.model.Response
+import com.yuzu.githubprofile.repository.model.Status
 import com.yuzu.githubprofile.repository.remote.api.ProfileApi
+import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
@@ -27,13 +30,13 @@ class ProfileRepositoryTest {
     private val profileData = ProfileData(0, "yuzu")
     private val userList = listOf(UserData(0,0))
 
-    private val profileDataResponse = Result.success(profileData)
-    private val userListResponse = Result.success(userList)
+    private val profileDataResponse = Response(Status.SUCCEED, profileData, null)
+    private val userListResponse = Response(Status.SUCCEED, userList, null)
 
     private val runtimeException = RuntimeException("Something went wrong", null)
 
-    private val errorProfile = Result.failure<ProfileData>(runtimeException)
-    private val errorUser = Result.failure<List<UserData>>(runtimeException)
+    private val errorProfile = Response<ProfileData>(Status.EMPTY, null, runtimeException)
+    private val errorUser = Response<List<UserData>>(Status.EMPTY, null, runtimeException)
 
 
     @Before
@@ -43,11 +46,11 @@ class ProfileRepositoryTest {
         every { mockException.code() } returns 401
 
         runBlocking {
-            every { api.userDetail("yuzu") } returns profileDataResponse
-            every { api.userDetail("Naruto") } returns errorProfile
+            coEvery { api.userDetail("yuzu") } returns profileDataResponse
+            coEvery { api.userDetail("Naruto") } returns errorProfile
 
-            every { api.userList(0) } returns userListResponse
-            every { api.userList(1) } returns errorUser
+            coEvery { api.userList(0) } returns userListResponse
+            coEvery { api.userList(1) } returns errorUser
         }
 
         repository = ProfileRepositoryImpl(api)
@@ -74,6 +77,6 @@ class ProfileRepositoryTest {
     @Test
     fun `test userList when invalid since is requested, then error is returned`() =
         runBlocking {
-            assertEquals(errorProfile, repository.userList(1))
+            assertEquals(errorUser, repository.userList(1))
         }
 }

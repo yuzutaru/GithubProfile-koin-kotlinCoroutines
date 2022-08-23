@@ -1,23 +1,27 @@
-package com.yuzu.githubprofile.repository.data
+package com.yuzu.githubprofile.repository.model
 
 /**
- * Created by Yustar Pramudana on 22/08/22.
+ * Created by Yustar Pramudana on 18/02/2021
  */
 
-open class Response<S, E: ErrorResponse.ErrorEntryWithMessage> {
-    var success: Boolean = true
-    var successData: S? = null
-    var errorData: ErrorResponse<E>? = null
-
-    inline fun onSuccess(block: (S) -> Unit) {
-        if (success) {
-            block(successData!!)
-        }
-    }
-
-    inline fun onError(block: (ErrorResponse<E>) -> Unit) {
-        if (!success) {
-            block(errorData!!)
-        }
+class Response<T>(
+    val status: Status,
+    val data: T?,
+    val error: Throwable?
+) {
+    companion object {
+        fun <T> empty() = Response<T>(Status.EMPTY, null, null)
+        fun <T> succeed(data: T) = Response(Status.SUCCEED, data, null)
+        fun <T> error(t: Throwable) = Response<T>(Status.FAILED, null, t)
+        fun <T> networkLost() = Response<T>(Status.NO_CONNECTION, null, null)
     }
 }
+
+enum class Status {
+    EMPTY,
+    SUCCEED,
+    FAILED,
+    NO_CONNECTION
+}
+
+object NoNetworkException : Exception()
