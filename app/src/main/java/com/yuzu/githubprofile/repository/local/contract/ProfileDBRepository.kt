@@ -1,5 +1,6 @@
 package com.yuzu.githubprofile.repository.local.contract
 
+import androidx.lifecycle.LiveData
 import com.yuzu.githubprofile.repository.data.ProfileData
 
 /**
@@ -7,8 +8,8 @@ import com.yuzu.githubprofile.repository.data.ProfileData
  */
 
 interface ProfileDBRepository {
-    fun getAllProfiles(): List<ProfileData>
-    fun getProfile(login: String): ProfileData
+    fun getAllProfiles(): LiveData<List<ProfileData>>
+    fun getProfile(login: String): LiveData<ProfileData>
     fun insert(profileData: ProfileData)
     fun insert(profileDataList: List<ProfileData>)
 }

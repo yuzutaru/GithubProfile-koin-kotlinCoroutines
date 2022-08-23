@@ -1,5 +1,6 @@
 package com.yuzu.githubprofile.repository.local.contract
 
+import androidx.lifecycle.LiveData
 import com.yuzu.githubprofile.repository.data.ProfileData
 import com.yuzu.githubprofile.repository.local.db.ProfileDAO
 
@@ -8,11 +9,11 @@ import com.yuzu.githubprofile.repository.local.db.ProfileDAO
  */
 
 class ProfileDBRepositoryImpl(private val dao: ProfileDAO): ProfileDBRepository {
-    override fun getAllProfiles(): List<ProfileData> {
+    override fun getAllProfiles(): LiveData<List<ProfileData>> {
         return dao.getAllProfiles()
     }
 
-    override fun getProfile(login: String): ProfileData {
+    override fun getProfile(login: String): LiveData<ProfileData> {
         return dao.getProfile(login)
     }
 
