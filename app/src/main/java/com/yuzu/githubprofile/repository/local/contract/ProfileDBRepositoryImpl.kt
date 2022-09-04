@@ -9,11 +9,11 @@ import com.yuzu.githubprofile.repository.local.db.ProfileDAO
  */
 
 class ProfileDBRepositoryImpl(private val dao: ProfileDAO): ProfileDBRepository {
-    override fun getAllProfiles(): LiveData<List<ProfileData>> {
+    override fun getAllProfiles(): List<ProfileData> {
         return dao.getAllProfiles()
     }
 
-    override fun getProfile(login: String): LiveData<ProfileData> {
+    override fun getProfile(login: String): ProfileData? {
         return dao.getProfile(login)
     }
 
