@@ -51,7 +51,7 @@ class ProfileDAOTest {
     @Test
     fun getAllProfileSingleInputTest() {
         db.profileDAO().insert(ProfileData(0))
-        val profileDataList = db.profileDAO().getAllProfiles().getOrAwaitValue()
+        val profileDataList = db.profileDAO().getAllProfiles()
         Assert.assertEquals(profileDataList.size, 1)
     }
 
@@ -59,7 +59,7 @@ class ProfileDAOTest {
     fun getAllProfileSingleInputOneByOneTest() {
         db.profileDAO().insert(ProfileData(0))
         db.profileDAO().insert(ProfileData(1))
-        val profileDataList = db.profileDAO().getAllProfiles().getOrAwaitValue()
+        val profileDataList = db.profileDAO().getAllProfiles()
         Assert.assertEquals(profileDataList.size, 2)
     }
 
@@ -67,14 +67,14 @@ class ProfileDAOTest {
     fun getAllProfileSingleInputOnConflictTest() {
         db.profileDAO().insert(ProfileData(0))
         db.profileDAO().insert(ProfileData(0))
-        val profileDataList = db.profileDAO().getAllProfiles().getOrAwaitValue()
+        val profileDataList = db.profileDAO().getAllProfiles()
         Assert.assertEquals(profileDataList.size, 1)
     }
 
     @Test
     fun getAllProfileListInputTest() {
         db.profileDAO().insert(listOf(ProfileData(0), ProfileData(1)))
-        val profileDataList = db.profileDAO().getAllProfiles().getOrAwaitValue()
+        val profileDataList = db.profileDAO().getAllProfiles()
         Assert.assertEquals(profileDataList.size, 2)
     }
 
@@ -82,7 +82,7 @@ class ProfileDAOTest {
     @Test
     fun getProfileByLoginSingleInputTest() {
         db.profileDAO().insert(ProfileData(0, "Yuzutaru"))
-        val profileData = db.profileDAO().getProfile("Yuzutaru").getOrAwaitValue()
+        val profileData = db.profileDAO().getProfile("Yuzutaru")
         Assert.assertNotNull(profileData)
     }
 
@@ -90,7 +90,7 @@ class ProfileDAOTest {
     fun getProfileByLoginSingleInputOneByOneTest() {
         db.profileDAO().insert(ProfileData(0, "Yuzutaru"))
         db.profileDAO().insert(ProfileData(1, "Yustar"))
-        val profileData = db.profileDAO().getProfile("Yuzutaru").getOrAwaitValue()
+        val profileData = db.profileDAO().getProfile("Yuzutaru")
         Assert.assertNotNull(profileData)
     }
 
@@ -98,21 +98,21 @@ class ProfileDAOTest {
     fun getProfileByLoginSingleInputOnConflictTest() {
         db.profileDAO().insert(ProfileData(0, "Yuzutaru"))
         db.profileDAO().insert(ProfileData(0, "Yustar"))
-        val profileData = db.profileDAO().getProfile("Yustar").getOrAwaitValue()
+        val profileData = db.profileDAO().getProfile("Yustar")
         Assert.assertNotNull(profileData)
     }
 
     @Test
     fun getProfileByLoginListInputTest() {
         db.profileDAO().insert(listOf(ProfileData(0, "Yuzutaru"), ProfileData(1, "Yustar")))
-        val profileData = db.profileDAO().getProfile("Yuzutaru").getOrAwaitValue()
+        val profileData = db.profileDAO().getProfile("Yuzutaru")
         Assert.assertNotNull(profileData)
     }
 
     @Test
     fun insertProfileDataTest() {
         db.profileDAO().insert(ProfileData(0, "yuzutaru"))
-        val profileDataList = db.profileDAO().getAllProfiles().getOrAwaitValue().size
+        val profileDataList = db.profileDAO().getAllProfiles().size
         Assert.assertEquals(profileDataList, 1)
     }
 
@@ -120,7 +120,7 @@ class ProfileDAOTest {
     fun insertProfileDataOneByOneTest() {
         db.profileDAO().insert(ProfileData(0, "yuzutaru"))
         db.profileDAO().insert(ProfileData(1, "yustar"))
-        val profileDataList = db.profileDAO().getAllProfiles().getOrAwaitValue().size
+        val profileDataList = db.profileDAO().getAllProfiles().size
         Assert.assertEquals(profileDataList, 2)
     }
 
@@ -128,14 +128,14 @@ class ProfileDAOTest {
     fun insertProfileDataOnConflictTest() {
         db.profileDAO().insert(ProfileData(0, "yuzutaru"))
         db.profileDAO().insert(ProfileData(0, "yustar"))
-        val profileDataList = db.profileDAO().getAllProfiles().getOrAwaitValue().size
+        val profileDataList = db.profileDAO().getAllProfiles().size
         Assert.assertEquals(profileDataList, 1)
     }
 
     @Test
     fun insertProfileDataListInputTest() {
         db.profileDAO().insert(listOf(ProfileData(0, "yuzutaru"), ProfileData(1, "yustar")))
-        val profileDataList = db.profileDAO().getAllProfiles().getOrAwaitValue().size
+        val profileDataList = db.profileDAO().getAllProfiles().size
         Assert.assertEquals(profileDataList, 2)
     }
 }
